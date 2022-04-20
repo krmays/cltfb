@@ -1,7 +1,7 @@
 ## Predicting final rank in CFB playoff ranking given only 12 stats available to CFP committee ##
 
 data <- readxl::read_excel("12stats.xlsx")
-data <- subset(data, Year != 2020) #For excluding 2020 season, if desired
+#data <- subset(data, Year != 2020) #For excluding 2020 season, if desired
 
 G5 <- subset(data, G5 == 1) #For looking at ranked G5 teams only
 ten <- subset(data, Rank >= 10) #For looking at Top 10 teams only
@@ -20,14 +20,14 @@ both <- step(model, direction = 'both')
 #both.10 <-step(model.10, direction = 'both')
 
 
-new.model <- lm(Rank ~ A + F + I + J, data = data)
+new.model <- lm(Rank ~ A + D + F + J + K + L, data = data)
 summary(new.model)
 
-new.model.G5 <- lm(Rank ~ A+ B + D + E + F + G + H I+ J + K, data = G5)
-summary(new.model.5)
+#new.model.G5 <- lm(Rank ~ B + D + E + G + H + J, data = G5)
+#summary(new.model.5)
 
-new.model.10 <-lm(Rank ~ A + F + H + J + K, data = ten)
-summary(new.model.10)
+#new.model.10 <-lm(Rank ~ A + F + H + J + K, data = ten)
+#summary(new.model.10)
 
 # Confirm model is improved
 # Would prefer this as a loop that just checks for new < old
